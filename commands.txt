@@ -1,0 +1,44 @@
+kafka-topics --bootstrap-server localhost:9092 –list
+
+kafka-topics --bootstrap-server localhost:9092 --topic <nomeTópico> --create --partitions 3 --replication-factor 1
+
+kafka-topics --bootstrap-server localhost:9092 --topic <nomeTópico> --describe
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic <nomeTópico> --group <nomeGrupo>
+
+kafka-console-producer --broker-list localhost:9092 --topic <nomeTópico>
+
+kafka-consumer-groups --bootstrap-server localhost:9092 --group <nomeGrupo> --reset-offsets --shift-by 2 --execute --topic <nomeTópico>
+
+kafka-consumer-groups --bootstrap-server localhost:9092 --group <nomeGrupo> \
+--reset-offsets --to-earliest --execute --topic <nomeTópico>
+
+kafka-consumer-groups --bootstrap-server localhost:9092 --list
+
+
+kafka-avro-console-producer \
+--broker-list broker:29092 \
+--topic users-avro \
+--property schema.registry.url=http://localhost:8081 \
+--property value.schema='{"type":"record","name":"useravroschema","fields":[{"name":"id","type":"int"}, {"name":"nome","type":"string"}]}'
+
+
+kafka-avro-console-consumer \
+--topic users-avro \
+--bootstrap-server broker:29092 \
+--property schema.registry.url=http://localhost:8081 \
+--from-beginning
+
+{"id": 1, "nome": "Otacilio"}
+{"id": 2, "nome": "Pedro"}
+
+kafka-avro-console-producer \
+--broker-list broker:29092 \
+--topic users-avro \
+--property schema.registry.url=http://localhost:8081 \
+--property value.schema='{"type":"record","name":"useravroschema","fields":[{"name":"id","type":"int"}, {"name":"nome","type":"string"},{"name":"unit", "type": "int", "default":1}]}'
+
+{"id": 3, "nome": "Santos", "unit": 0}
+{"id": 4, "nome": "Filho", "unit": 1}
+
+
