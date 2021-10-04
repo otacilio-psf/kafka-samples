@@ -40,5 +40,3 @@ kafka-avro-console-producer \
 
 {"id": 3, "nome": "Santos", "unit": 0}
 {"id": 4, "nome": "Filho", "unit": 1}
-
-
